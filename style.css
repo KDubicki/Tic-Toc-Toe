@@ -1,0 +1,13 @@
+body {
+    background-color: #121212;
+}
+
+* {
+    font-family: arial, arial, helvetica, sans-serif;
+    color: #ffffff;
+}
+
+.hidden {
+    display: none;
+}
+
