@@ -17,13 +17,8 @@ body {
 }
 
 svg {
-    width: auto;
-    height: auto;
     fill: #111111;
-    filter: drop-shadow(0px 0px 2px rgb(133, 133, 133));
-    position: absolute;
-    inset: 0;
-    margin: auto;
+    filter: drop-shadow(0 0 0.2rem #141414);
 }
 
 .hidden {
@@ -32,6 +27,21 @@ svg {
 
 .btn-play {
     cursor: pointer;
+    color: #4FB477;
+    background-color: #121212;
+    border: 0.2rem solid #4FB477;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 2rem;
+    box-shadow: 0 0 0.6rem #4FB477;
+    text-shadow: 0 0 0.6rem #4FB477;
+    transition: 0.6s;
+}
+
+.btn-play:hover {
+    color: #121212;
+    background-color: #4FB477;
 }
 
 .state {
@@ -39,10 +49,7 @@ svg {
 }
 
 .header {
-    width: 80vw;
-    height: 4rem;
-    padding: 1rem 10vw;
-
+    margin: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,58 +57,70 @@ svg {
 }
 
 .header__title {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
 }
 
-.playground {
-
+.header span {
+    opacity: 0;
 }
 
-.playground tr td {
-    width: 10rem;
-    height: 10rem;
+.board {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem;
+    height: 50vh;
+    width: 50vh;
+    margin: auto;
+    background-color: #292929;
+}
+
+.board_cell {
+    background-color: #121212;
     position: relative;
-    background: red;
+    cursor: pointer;
 }
 
-.playground tr td svg:nth-child(1) {
-    height: 30px;
-    width: 30px;
-    fill: #9250E2;
+.board_cell svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+}
+
+.board_cell svg:nth-child(1),
+.board_cell svg:nth-child(2),
+.player__small svg {
+    height: 2rem;
+    width: 2rem;
+    /*fill: #9250E2;*/
+}
+
+.board_cell svg:nth-child(3),
+.board_cell svg:nth-child(4),
+.player__medium svg {
+    height: 4rem;
+    width: 4rem;
+}
+
+.board_cell svg:nth-child(5),
+.board_cell svg:nth-child(6),
+.player__big svg {
+    height: 6rem;
+    width: 6rem;
+}
+
+.board_cell svg:nth-child(odd) {
     z-index: 1;
 }
 
-.playground tr td svg:nth-child(2) {
-    height: 30px;
-    width: 30px;
-    fill: #33B8FF;
-    z-index: 2;
-}
-
-.playground tr td svg:nth-child(3) {
-    height: 60px;
-    width: 60px;
-}
-
-.playground tr td svg:nth-child(4) {
-    height: 60px;
-    width: 60px;
-
-}
-
-.playground tr td svg:nth-child(5) {
-    height: 90px;
-    width: 90px;
-}
-
-.playground tr td svg:nth-child(6) {
-    height: 90px;
-    width: 90px;
-}
-
-.playground__wrapper {
-
+.playground {
+    width: 80vw;
+    height: calc(60vh - 6rem);
+    padding: 10vh 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .counter {
@@ -112,8 +131,31 @@ svg {
 
 }
 
-.player__o {
+.player {
+    width: auto;
+    height: 50vh;
+    position: relative;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.player div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.player div svg {
+    filter: drop-shadow(0 0 0.3rem #292929);
+}
+
+.player__o {
+    order: -1;
 }
 
 .player__x {
