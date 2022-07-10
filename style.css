@@ -17,12 +17,8 @@ body {
 }
 
 svg {
-    fill: #111111;
-    filter: drop-shadow(0 0 0.2rem #141414);
-}
-
-.hidden {
-    opacity: 0;
+    /*fill: #111111;*/
+    /*filter: drop-shadow(0 0 0.2rem #141414);*/
 }
 
 .btn-play {
@@ -45,7 +41,7 @@ svg {
 }
 
 .state {
-
+    font-weight: bold;
 }
 
 .header {
@@ -61,7 +57,17 @@ svg {
     font-weight: bold;
 }
 
-.header span {
+.header__title span:nth-child(odd) {
+    color: #9250E2;
+    text-shadow: 0 0 0.6rem #9250E2;
+}
+
+.header__title span:nth-child(even) {
+    color: #33B8FF;
+    text-shadow: 0 0 0.6rem #33B8FF;
+}
+
+.state {
     opacity: 0;
 }
 
@@ -79,13 +85,14 @@ svg {
 .board_cell {
     background-color: #121212;
     position: relative;
-    cursor: pointer;
 }
 
 .board_cell svg {
     position: absolute;
     inset: 0;
     margin: auto;
+    opacity: 0;
+    /*cursor: pointer;*/
 }
 
 .board_cell svg:nth-child(1),
@@ -111,7 +118,13 @@ svg {
 }
 
 .board_cell svg:nth-child(odd) {
-    z-index: 1;
+    fill: #9250E2;
+    filter: drop-shadow(0 0 0.6rem #9250E2)
+}
+
+.board_cell svg:nth-child(even) {
+    fill: #33B8FF;
+    filter: drop-shadow(0 0 0.2rem #33B8FF);
 }
 
 .playground {
@@ -146,12 +159,12 @@ svg {
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    cursor: pointer;
     font-size: 2rem;
 }
 
 .player div svg {
-    filter: drop-shadow(0 0 0.3rem #292929);
+    filter: drop-shadow(0 0 0.3rem #646369);
+    fill: #646369
 }
 
 .player__o {
@@ -159,5 +172,10 @@ svg {
 }
 
 .player__x {
+    order: 1;
+}
 
+.cell__show {
+    z-index: 2 !important;
+    opacity: 1 !important;
 }
