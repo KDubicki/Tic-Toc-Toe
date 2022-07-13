@@ -1,6 +1,7 @@
 class Player {
     assets = [2, 2, 2];
     grade = 0;
+    isPlaying = false;
 
     constructor(id, color) {
         this.id = id.toUpperCase();
@@ -14,6 +15,7 @@ class Player {
     }
 
     play() {
+        this.isPlaying = true;
         this.options.forEach(option => {
             option.style.cursor = 'pointer';
             const svg = option.querySelector('svg');
@@ -39,6 +41,8 @@ class Player {
     }
 
     chooseGrade(elem) {
+        if (!this.isPlaying) return;
+
         this.options.forEach((item, index) => {
             const element = item.querySelector('svg');
             if (elem === element) {
@@ -49,5 +53,18 @@ class Player {
         this.setOptions();
     }
 
+    stop() {
+        this.isPlaying = false;
 
+        this.options.forEach(option => {
+            option.style.cursor = 'default';
+            Svg.off(option.querySelector('svg'));
+        })
+
+        document.querySelector('.active-grade').classList.remove('active-grade');
+    }
+
+    win() {
+        this.options.forEach(option => Svg.setColor(option.querySelector('svg'), this.color))
+    }
 }
