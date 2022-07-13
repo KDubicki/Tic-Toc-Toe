@@ -21,11 +21,11 @@ const start = () => {
     players['x'].reset();
     board.reset();
 
-    playerTurn(players[board.play]);
+    playerTurn();
 }
 
-const playerTurn = (player) => {
-    state.textContent = `Player ${player.id} turn`;
+const playerTurn = (player = players[players.play]) => {
+    state.textContent = `Player ${ player.id.toUpperCase() } turn`;
     state.style.cssText = `
         opacity: 1;
         color: ${ player.color };
@@ -38,6 +38,22 @@ const playerTurn = (player) => {
 const playerMarkCell = (e) => {
     if (!board.isOkToMark(e.target)) return;
     board.markCell(e.target, players.play);
+    if (board.checkWinner()) showWinner()
+    else {
+        players[players.play].stop();
+        players.play = (players.play === 'x' ? 'o' : 'x');
+        playerTurn();
+    }
+}
+
+const showWinner = () => {
+    state.textContent = `Player ${ players.play.toUpperCase() } win`;
+    board.showWinner();
+    players[players.play].win();
+    playButton.style.cssText = `
+        opacity: 1;
+        visibility: visible;
+    ` ;
 }
 
 
@@ -47,6 +63,6 @@ const playerMarkCell = (e) => {
 
 
 
-boardCells.forEach(cell => cell.addEventListener('click', playerMarkCell));
-playButton.addEventListener('click', start);
 
+playButton.addEventListener('click', start);
+boardCells.forEach(cell => cell.addEventListener('click', playerMarkCell));
