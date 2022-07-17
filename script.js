@@ -19,7 +19,7 @@ const start = () => {
     players.play = (!Math.round(Math.random() * 2) ? 'x' : 'o');
     players['o'].reset();
     players['x'].reset();
-    board.reset();
+    board.reset(boardCells);
 
     playerTurn();
 }
@@ -37,33 +37,54 @@ const playerTurn = (player = players[players.play]) => {
 
 const playerMarkCell = (e) => {
     if (!board.isOkToMark(e.target)) return;
+
+    players[players.play].setDownAsset();
     board.markCell(e.target, players.play);
-    players[players.play].refreshAssets();
-    if (board.checkWinner()) showWinner()
-    else {
-        players[players.play].stop();
-        players.play = (players.play === 'x' ? 'o' : 'x');
-        playerTurn();
+
+    players[players.play].stop();
+    if (checkGameState()) playerTurn();
+}
+
+const checkGameState = () => {
+    if (board.checkWinner()) {
+        showWinner()
+        return false;
     }
+
+    players.play = (players.play === 'x' ? 'o' : 'x');
+    if (board.checkDraw(players[players.play])) {
+        showDraw()
+        return false;
+    }
+
+    return true;
 }
 
 const showWinner = () => {
     state.textContent = `Player ${ players.play.toUpperCase() } win`;
     board.showWinner();
     players[players.play].win();
+    showStartButton();
+}
+
+const showDraw = () => {
+    console.log('draw')
+    state.textContent = `Draw`;
+    state.style.cssText = `
+        opacity: 1;
+        color: white;
+        text-shadow: 0 0 0.6rem white;
+    `;
+
+    showStartButton();
+}
+
+const showStartButton = () => {
     playButton.style.cssText = `
         opacity: 1;
         visibility: visible;
     ` ;
 }
-
-
-
-
-
-
-
-
 
 playButton.addEventListener('click', start);
 boardCells.forEach(cell => cell.addEventListener('click', playerMarkCell));

@@ -10,8 +10,11 @@ class Player {
     }
 
     reset() {
-        this.assets.fill(2);
         this.grade = 0;
+        this.assets.fill(2);
+        this.refreshAssets();
+
+        this.options.forEach(option => Svg.off(option.querySelector('svg')))
     }
 
     play() {
@@ -47,11 +50,17 @@ class Player {
         })
     }
 
-    refreshAssets() {
-        const asset = document.querySelector('.active-grade');
-        const counter = asset.querySelector('.counter');
+    setDownAsset() {
+        const option = document.querySelector('.active-grade');
+        this.assets[option.dataset.grade]--;
+        this.refreshAssets();
+    }
 
-        counter.innerText = `x${ --this.assets[asset.dataset.grade] }`;
+    refreshAssets() {
+        this.options.forEach((option, index) => {
+            const counter = option.querySelector('.counter');
+            counter.innerText = `x${ this.assets[index] }`;
+        })
     }
 
     chooseGrade(target) {

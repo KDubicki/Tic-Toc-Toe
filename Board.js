@@ -9,11 +9,18 @@ class Board {
     ];
     winningCombination = null;
 
-    reset() {
+    reset(cells) {
         this.isPlaying = true;
+        this.turn = 0;
         this.winningCombination = null;
         this.cells.fill('');
         this.grades.fill(-1);
+
+        cells.forEach(cell => {
+            const svg = cell.querySelectorAll('svg');
+            svg[0].style.opacity = '0';
+            svg[1].style.opacity = '0';
+        })
     }
 
     isOkToMark(target) {
@@ -49,19 +56,25 @@ class Board {
         return target;
     }
 
+    checkDraw({assets}) {
+        const assetsSum = assets.slice(Math.min(...this.grades) + 1).reduce((accum, asset) => accum + asset, 0);
+        return assetsSum === 0;
+    }
+
     checkWinner() {
-        let isWinner = false;
+        let winner = false;
         this.winningCombinations.forEach(index => {
             if (this.cells[index[0]] !== '') {
                 if (this.cells[index[0]] === this.cells[index[1]] && this.cells[index[0]] === this.cells[index[2]]) {
                     this.winningCombination = index;
-                    isWinner = true;
+                    winner = true;
                 }
             }
         })
 
-        return isWinner;
+        return winner;
     }
+
 
     showWinner() {
         const cells = document.querySelectorAll('.board_cell');
@@ -73,4 +86,3 @@ class Board {
         })
     }
 }
-
