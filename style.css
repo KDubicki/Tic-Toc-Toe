@@ -97,7 +97,7 @@ svg {
 
 .board_cell svg:nth-child(1),
 .board_cell svg:nth-child(2),
-.player__small svg {
+.player__cell:nth-child(1) svg {
     height: 2rem;
     width: 2rem;
     /*fill: #9250E2;*/
@@ -105,14 +105,14 @@ svg {
 
 .board_cell svg:nth-child(3),
 .board_cell svg:nth-child(4),
-.player__medium svg {
+.player__cell:nth-child(2) svg {
     height: 4rem;
     width: 4rem;
 }
 
 .board_cell svg:nth-child(5),
 .board_cell svg:nth-child(6),
-.player__big svg {
+.player__cell:nth-child(3) svg {
     height: 6rem;
     width: 6rem;
 }

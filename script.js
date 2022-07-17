@@ -38,6 +38,7 @@ const playerTurn = (player = players[players.play]) => {
 const playerMarkCell = (e) => {
     if (!board.isOkToMark(e.target)) return;
     board.markCell(e.target, players.play);
+    players[players.play].refreshAssets();
     if (board.checkWinner()) showWinner()
     else {
         players[players.play].stop();

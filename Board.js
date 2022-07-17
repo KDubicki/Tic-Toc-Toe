@@ -60,7 +60,6 @@ class Board {
             }
         })
 
-        console.log(isWinner)
         return isWinner;
     }
 

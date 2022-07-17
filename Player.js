@@ -15,8 +15,15 @@ class Player {
     }
 
     play() {
+        while (this.assets[this.grade] === 0) {
+            this.grade++;
+            if (this.grade === 3) this.grade = 0;
+        }
+
         this.isPlaying = true;
-        this.options.forEach(option => {
+        this.options.forEach((option, index) => {
+            if (this.assets[index] === 0) return;
+
             option.style.cursor = 'pointer';
             const svg = option.querySelector('svg');
             svg.addEventListener('click', e => this.chooseGrade(e.target));
@@ -40,17 +47,27 @@ class Player {
         })
     }
 
-    chooseGrade(elem) {
+    refreshAssets() {
+        const asset = document.querySelector('.active-grade');
+        const counter = asset.querySelector('.counter');
+
+        counter.innerText = `x${ --this.assets[asset.dataset.grade] }`;
+    }
+
+    chooseGrade(target) {
         if (!this.isPlaying) return;
 
-        this.options.forEach((item, index) => {
-            const element = item.querySelector('svg');
-            if (elem === element) {
-                this.grade = item.dataset.grade;
-            }
-        })
+        target = this.getCellHandle(target);
+        const grade = target.dataset.grade;
+        if (this.assets[grade] === 0) return;
 
+        this.grade = grade;
         this.setOptions();
+    }
+
+    getCellHandle(target) {
+        while(!target.classList.contains('player__cell')) target = target.parentNode;
+        return target;
     }
 
     stop() {
