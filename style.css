@@ -4,21 +4,9 @@ body {
     padding: 0;
 }
 
-/*
-    green: #4FB477
-    blue: #33B8FF
-    purple: #9250E2
-
-*/
-
 * {
     font-family: arial, arial, helvetica, sans-serif;
     color: #ffffff;
-}
-
-svg {
-    /*fill: #111111;*/
-    /*filter: drop-shadow(0 0 0.2rem #141414);*/
 }
 
 .btn-play {
@@ -69,6 +57,7 @@ svg {
 
 .state {
     opacity: 0;
+    transform: translateY(2rem);
 }
 
 .board {
@@ -76,9 +65,9 @@ svg {
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 0.5rem;
-    height: 50vh;
-    width: 50vh;
-    margin: auto;
+    height: min(50vw, 50vh);
+    width: min(50vw, 50vh);
+    margin: 2rem;
     background-color: #292929;
 }
 
@@ -92,26 +81,18 @@ svg {
     inset: 0;
     margin: auto;
     opacity: 0;
-    /*cursor: pointer;*/
 }
 
-.board_cell svg:nth-child(1),
-.board_cell svg:nth-child(2),
 .player__cell:nth-child(1) svg {
     height: 2rem;
     width: 2rem;
-    /*fill: #9250E2;*/
 }
 
-.board_cell svg:nth-child(3),
-.board_cell svg:nth-child(4),
 .player__cell:nth-child(2) svg {
     height: 4rem;
     width: 4rem;
 }
 
-.board_cell svg:nth-child(5),
-.board_cell svg:nth-child(6),
 .player__cell:nth-child(3) svg {
     height: 6rem;
     width: 6rem;
@@ -136,17 +117,9 @@ svg {
     align-items: center;
 }
 
-.counter {
-
-}
-
-.player_wrapper {
-
-}
-
 .player {
     width: auto;
-    height: 50vh;
+    height: min(50vw, 50vh);
     position: relative;
 
     display: flex;
@@ -176,6 +149,6 @@ svg {
 }
 
 .cell__show {
-    z-index: 2 !important;
-    opacity: 1 !important;
+    z-index: 2;
+    opacity: 1;
 }
