@@ -14,5 +14,18 @@ class Svg {
             z-index: 1;
         `
     }
+
+    static resizeAndShow(svg, size) {
+        svg.style.cssText = `
+            width: ${ size * 2 + 2 }rem;
+            height: ${ size * 2 + 2 }rem;
+            z-index: 2;
+            opacity: 1;
+        `
+    }
+
+    static hide(svg) {
+        svg.style.opacity = '0';
+    }
 }
 

@@ -11,15 +11,14 @@ class Board {
 
     reset(cells) {
         this.isPlaying = true;
-        this.turn = 0;
         this.winningCombination = null;
         this.cells.fill('');
         this.grades.fill(-1);
 
         cells.forEach(cell => {
             const svg = cell.querySelectorAll('svg');
-            svg[0].style.opacity = '0';
-            svg[1].style.opacity = '0';
+            Svg.hide(svg[0]);
+            Svg.hide(svg[1]);
         })
     }
 
@@ -42,13 +41,8 @@ class Board {
 
         let svg = cell.querySelectorAll('svg');
         svg = (player === 'x' ? [svg[1], svg[0]] : [svg[0], svg[1]]);
-        svg[0].style.cssText = `
-            width: ${ grade * 2 + 2 }rem;
-            height: ${ grade * 2 + 2 }rem;
-            z-index: 2;
-            opacity: 1;
-        `
-        svg[1].style.opacity = '0';
+        Svg.resizeAndShow(svg[0], grade);
+        Svg.hide(svg[1]);
     }
 
     getCellHandle(target) {
@@ -80,8 +74,8 @@ class Board {
         const cells = document.querySelectorAll('.board_cell');
         cells.forEach((cell, index) => {
             if (!this.winningCombination.includes(index)) {
-                const svgs = cell.querySelectorAll('svg');
-                svgs.forEach((svg) => svg.style.opacity = '0');
+                const svg = cell.querySelectorAll('svg');
+                svg.forEach((item) => item.style.opacity = '0');
             }
         })
     }
