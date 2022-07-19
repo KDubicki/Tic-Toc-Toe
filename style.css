@@ -20,12 +20,12 @@ body {
     padding: 0.5rem 2rem;
     box-shadow: 0 0 0.6rem #4FB477;
     text-shadow: 0 0 0.6rem #4FB477;
-    transition: 0.6s;
 }
 
 .btn-play:hover {
     color: #121212;
     background-color: #4FB477;
+    transition: 0.6s;
 }
 
 .state {
